@@ -152,6 +152,7 @@ static const char *colorname[] = {
 
 };
 
+float alpha = .7;
 
 /*
  * Default colors (colorname index)
