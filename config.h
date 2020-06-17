@@ -5,7 +5,8 @@
  *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
-static char *font = "Sauce Code Pro Nerd Font:pixelsize=12:antialias=true:autohint=true";
+/* static char *font = "Sauce Code Pro Nerd Font:pixelsize=12:antialias=true:autohint=true"; */
+static char *font = "Sauce Code Pro Nerd Font:pixelsize=14:antialias=true:autohint=true";
 static int borderpx = 2;
 
 /*
@@ -44,8 +45,8 @@ static unsigned int tripleclicktimeout = 600;
 int allowaltscreen = 1;
 
 /* frames per second st should at maximum draw to the screen */
-static unsigned int xfps = 120;
-static unsigned int actionfps = 30;
+static unsigned int xfps = 60;
+static unsigned int actionfps = 60;
 
 /*
  * blinking timeout (set to 0 to disable blinking) for the terminal blinking
@@ -87,30 +88,68 @@ unsigned int tabspaces = 8;
 /* Terminal colors (16 first used in escape sequence) */
 static const char *colorname[] = {
 	/* 8 normal colors */
-	"black",
-	"red3",
-	"green3",
-	"yellow3",
-	"blue2",
-	"magenta3",
-	"cyan3",
-	"gray90",
+	/* "black", */
+	/* "red3", */
+	/* "green3", */
+	/* "yellow3", */
+	/* "blue2", */
+	/* "magenta3", */
+	/* "cyan3", */
+	/* "gray90", */
 
-	/* 8 bright colors */
-	"gray50",
-	"red",
-	"green",
-	"yellow",
-	"#5c5cff",
-	"magenta",
-	"cyan",
-	"white",
+	/* /1* 8 bright colors *1/ */
+	/* "gray50", */
+	/* "red", */
+	/* "green", */
+	/* "yellow", */
+	/* "#5c5cff", */
+	/* "magenta", */
+	/* "cyan", */
+	/* "white", */
+
+	/* /1* base-16 google *1/ */
+	/* "#1d1f21", */
+	/* "#cc342b", */
+	/* "#198844", */
+	/* "#fba922", */
+	/* "#3971ed", */
+	/* "#a36ac7", */
+	/* "#3971ed", */
+	/* "#c5c8c6", */
+	/* "#969896", */
+	/* "#cc342b", */
+	/* "#198844", */
+	/* "#fba922", */
+	/* "#3971ed", */
+	/* "#a36ac7", */
+	/* "#3971ed", */
+	/* "#ffffff", */
+
+    "#1c1c1c",
+    "#ff005b",
+    "#cee318",
+    "#ffe755",
+    "#048ac7",
+    "#b854df",
+    "#0ac1cd",
+    "#e5e5e5",
+    "#666666",
+    "#ff00a0",
+    "#ccff00",
+    "#ff9f00",
+    "#48c6ff",
+    "#d775ff",
+    "#63e7f0",
+    "#f3f3f3",
 
 	[255] = 0,
 
 	/* more colors can be added after 255 to use with DefaultXX */
-	"#cccccc",
-	"#555555",
+	"#c5c5c5", // FG
+	"#1c1c1c", // BG
+	"#915a00", // cursor
+	"#6d00e3", // cursor reverse
+
 };
 
 
@@ -118,10 +157,14 @@ static const char *colorname[] = {
  * Default colors (colorname index)
  * foreground, background, cursor, reverse cursor
  */
-unsigned int defaultfg = 7;
-unsigned int defaultbg = 0;
-static unsigned int defaultcs = 256;
-static unsigned int defaultrcs = 257;
+/* unsigned int defaultfg = 7; */
+/* unsigned int defaultbg = 0; */
+/* static unsigned int defaultcs = 256; */
+/* static unsigned int defaultrcs = 257; */
+unsigned int defaultfg = 256;
+unsigned int defaultbg = 257;
+static unsigned int defaultcs = 8;
+static unsigned int defaultrcs = 259;
 
 /*
  * Default shape of cursor
@@ -165,6 +208,8 @@ static uint forcemousemod = ShiftMask;
  */
 static MouseShortcut mshortcuts[] = {
 	/* mask                 button   function        argument       release */
+	{ ShiftMask,            Button4, kscrollup,      {.i = 1} },
+	{ ShiftMask,            Button5, kscrolldown,    {.i = 1} },
 	{ XK_ANY_MOD,           Button2, selpaste,       {.i = 0},      1 },
 	{ XK_ANY_MOD,           Button4, ttysend,        {.s = "\031"} },
 	{ XK_ANY_MOD,           Button5, ttysend,        {.s = "\005"} },
@@ -188,6 +233,8 @@ static Shortcut shortcuts[] = {
 	{ TERMMOD,              XK_Y,           selpaste,       {.i =  0} },
 	{ ShiftMask,            XK_Insert,      selpaste,       {.i =  0} },
 	{ TERMMOD,              XK_Num_Lock,    numlock,        {.i =  0} },
+	{ ShiftMask,            XK_Page_Up,     kscrollup,      {.i = -1} },
+	{ ShiftMask,            XK_Page_Down,   kscrolldown,    {.i = -1} },
 };
 
 /*
